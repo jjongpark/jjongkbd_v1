@@ -1,0 +1,607 @@
+meta:
+  engine: 4.1.0
+  version: 0.1
+  author: jjongpark@gmail.com
+
+units:
+  # Gap betwen two adjacent key caps, or padding
+  # around a key
+  gap: 1
+
+  # u[n]: width of a MX key cap whose size is n-u
+  # U[n]: width including the gap
+  u1: 18
+  U1: u1 + gap
+
+  u1_25: 22.5
+  U1_25: u1_25 + gap
+
+  u1_5: 27.5
+  U1_5: u1_5 + gap
+
+  u1_75: 32
+  U1_75: u1_75 + gap
+
+  u2: 37
+  U2: u2 + gap
+
+  u2_25: 41
+  U2_25: u2_25 + gap
+
+  u2_75: 51
+  U2_75: u2_75 + gap
+
+points:
+  # Rotate in order to model columns as rows
+  rotate: -90
+  zones:
+    # Left-side keyboard.
+    # Keys are added from the top row to the bottom row, 
+    # and from left to right in the same row.
+    left:
+      # Adjust for KiCAD
+      anchor:
+        shift: [3u, 2u]
+
+      # This key-level rotation is to counter the zone-level
+      # rotation above so that swiches are oriented upward
+      key:
+        adjust:
+          rotate: 90
+      columns:
+        function:
+          key:
+            left_rownet: LR1
+          rows:
+            esc:
+              # Some space between esc and f1
+              padding: 2u
+              left_colnet: LC1
+            f1:
+              left_colnet: LC3
+            f2:
+              left_colnet: LC4
+            f3:
+              left_colnet: LC5
+            f4:
+              left_colnet: LC6
+            f5:
+              left_colnet: LC7
+        num:
+          key:
+            # add some space between function keys and the number keys
+            spread: 1.3u
+            left_rownet: LR2
+          rows:
+            tilda:
+              left_colnet: LC1
+            one:
+              left_colnet: LC2
+            two:
+              left_colnet: LC3
+            three:
+              left_colnet: LC4
+            four:
+              left_colnet: LC5
+            five:
+              left_colnet: LC6
+            six:
+              left_colnet: LC7
+        top:
+          key:
+            left_rownet: LR3
+          rows:
+            tab:
+              width: u1_5
+              shift: [0, (U1_5 - U1)/2]
+              padding: (U1_5 + U1)/2
+              left_colnet: LC1
+            q:
+              left_colnet: LC2
+            w:
+              left_colnet: LC3
+            e:
+              left_colnet: LC4
+            r:
+              left_colnet: LC5
+            t:
+              left_colnet: LC6
+        mid:
+          key:
+            left_rownet: LR4
+          rows:
+            caps:
+              width: u1_75
+              shift: [0, (U1_75 - U1)/2]
+              padding: (U1_75 + U1)/2
+              left_colnet: LC1
+            a:
+              left_colnet: LC2
+            s:
+              left_colnet: LC3
+            d:
+              left_colnet: LC4
+            f:
+              left_colnet: LC5
+            g:
+              left_colnet: LC6
+        bottom:
+          key:
+            left_rownet: LR5
+          rows:
+            shift:
+              width: u2_25
+              shift: [0, (U2_25 - U1)/2]
+              padding: (U2_25 + U1)/2
+              left_colnet: LC1
+            z:
+              left_colnet: LC2
+            x:
+              left_colnet: LC3
+            c:
+              left_colnet: LC4
+            v:
+              left_colnet: LC5
+            b:
+              left_colnet: LC6
+        meta:
+          key:
+            left_rownet: LR6
+          rows:
+            ctrl:
+              width: u1_25
+              shift: [0, (U1_25 - U1)/2]
+              padding: (U1_25 + U1_25)/2
+              left_colnet: LC1
+            win:
+              width: u1_25
+              padding: (U1_25 + U1_25)/2
+              left_colnet: LC2
+            alt:
+              width: u1_25
+              # more gap between alt and space
+              padding: (U1_25 + U2_75)/2 + 0.5u
+              left_colnet: LC3
+            space:
+              width: u2_75
+              left_colnet: LC5
+    # Right-side keyboard.
+    right:
+      # Keys are added from bottom row to the top row
+      # And from right to left in the same row
+      # so that the keys are right aligned.
+      # To do so, the right side is rotated again
+      anchor:
+        ref: left_meta_space
+        shift: [13u, 0]
+        rotate: 90
+      # Counter-rorate each key so that they face
+      # upward
+      key:
+        adjust:
+          rotate: -90
+      columns:
+        meta:
+          key:
+            right_rownet: RR6
+          rows:
+            ctrl_r:
+              width: u1_25
+              shift: [0, (U1_25 - U1)/2]
+              padding: (U1_25 + U1_25)/2
+              right_colnet: RC8
+            meta:
+              width: u1_25
+              padding: (U1_25 + U1_25)/2
+              right_colnet: RC7
+            fn:
+              width: u1_25
+              padding: (U1_25 + U1_25)/2
+              right_colnet: RC6
+            alt_r:
+              width: u1_25
+              # More space between alt and space
+              padding: (U1_25 + U2_75)/2 + 0.5u
+              right_colnet: RC5
+            space_r:
+              width: u2_75
+              right_colnet: RC2
+        bottom:
+          key:
+            right_rownet: RR5
+          rows:
+            shift_r:
+              width: u2_75
+              shift: [0, (U2_75 - U1)/2]
+              padding: (U2_75 + U1)/2
+              right_colnet: RC8
+            slash:
+              right_colnet: RC6
+            period:
+              right_colnet: RC5
+            comma:
+              right_colnet: RC4
+            m:
+              right_colnet: RC3
+            n:
+              right_colnet: RC2
+            # Extra "B" on the right side
+            b_r:
+              right_colnet: RC1
+        mid:
+          key:
+            right_rownet: RR4
+          rows:
+            enter:
+              width: u2_25              
+              shift: [0, (U2_25 - U1)/2]
+              padding: (U2_25 + U1)/2
+              right_colnet: RC8
+            quote:
+              right_colnet: RC6
+            colon:
+              right_colnet: RC5
+            l:
+              right_colnet: RC4
+            k:
+              right_colnet: RC3
+            j:
+              right_colnet: RC2
+            h:
+              right_colnet: RC1
+        top:
+          key:
+            right_rownet: RR3
+          rows:
+            pipe:
+              width: u1_5
+              shift: [0, (U1_5 - U1)/2]
+              padding: (U1_5 + U1)/2
+              right_colnet: RC8
+            right_paren:
+              right_colnet: RC7
+            left_paren:
+              right_colnet: RC6
+            p:
+              right_colnet: RC5
+            o:
+              right_colnet: RC4
+            i:
+              right_colnet: RC3
+            u:
+              right_colnet: RC2
+            y:
+              right_colnet: RC1
+        num:
+          key:
+            right_rownet: RR2
+          rows:
+            backspace:
+              width: u2
+              shift: [0, (U2 - U1)/2]
+              padding: (U2 + U1)/2
+              right_colnet: RC8
+            plus:
+              right_colnet: RC7
+            minus:
+              right_colnet: RC6
+            zero:
+              right_colnet: RC5
+            nine:
+              right_colnet: RC4
+            eight:
+              right_colnet: RC3
+            seven:
+              right_colnet: RC2
+        function:
+          key:
+            spread: 1.3u
+            right_rownet: RR1
+          rows:
+            f12:
+              right_colnet: RC8
+            f11:
+              right_colnet: RC7
+            f10:
+              right_colnet: RC6
+            f9:
+              padding: 1.5u
+              right_colnet: RC5
+            f8:
+              right_colnet: RC4
+            f7:
+              right_colnet: RC3
+            f6:
+              right_colnet: RC2
+            # Extra F5 on the right side
+            f5_r:
+              right_colnet: RC1
+        
+outlines:
+  left_outline:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: left_function_esc
+          shift: [-0.7u, 0.7u]
+        - ref: left_function_esc
+          shift: [8u, 0.7u]
+        - ref: left_function_esc
+          shift: [8u, -3u]
+        - ref: left_function_esc
+          shift: [7u, -3u]
+        - ref: left_function_esc
+          shift: [7u, -6u]
+        - ref: left_function_esc
+          shift: [-0.7u, -6u]
+      fillet: 3
+
+  right_outline:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: right_function_f12
+          shift: [0.7u, 0.7u]
+        - ref: right_function_f12
+          shift: [0.7u, -6u]
+        - ref: right_function_f12
+          shift: [-8.5u, -6u]
+        - ref: right_function_f12
+          shift: [-8.5u, -3u]
+        - ref: right_function_f12
+          shift: [-9.5u, -3u]
+        - ref: right_function_f12
+          shift: [-9.5u, 0.7u]
+      fillet: 3
+
+  keys:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [u-1, u-1]
+
+  all:
+    - name: left_outline
+    - operation: add
+      name: right_outline
+    - operation: subtract
+      name: keys
+
+pcbs:
+  jjongkbd:
+    template: kicad8
+    outlines:
+      left:
+        outline: left_outline
+      right:
+        outline: right_outline
+      
+    footprints:
+      left_switch:
+        what: mx
+        where: /^left.*/
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{left_colnet}}"
+          to: "{{colrow}}"
+      right_switch:
+        what: mx
+        where: /^right.*/
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{right_colnet}}"
+          to: "{{colrow}}"
+
+      left_diode:
+        what: ceoloide/diode_tht_sod123
+        where: /^left.*/
+        params:
+          include_tht: true
+          from: "{{colrow}}"
+          to: "{{left_rownet}}"
+        adjust:
+          shift: [0, -5]
+      right_diode:
+        what: ceoloide/diode_tht_sod123
+        where: /^right.*/
+        params:
+          include_tht: true
+          from: "{{colrow}}"
+          to: "{{right_rownet}}"
+        adjust:
+          shift: [0, -5]
+
+      left_reset:
+        what: ceoloide/reset_switch_tht_top
+        params:
+          side: B
+          from: LGND
+          to: LRST
+        where: 
+          ref: left_function_f5
+          shift: [1.85u, -0.1u]
+          rotate: 90
+      right_reset:
+        what: ceoloide/reset_switch_tht_top
+        params:
+          side: B
+          from: RGND
+          to: RRST
+        where:
+          ref: right_function_f5_r
+          shift: [-1.85u, -0.1u]
+          rotate: 90
+
+      left_power_switch:
+        what: ceoloide/power_switch_smd_side
+        params:
+          side: B
+          from: LBAT
+          to: LRAW
+        where: 
+          ref: left_function_f5
+          shift: [1.85u, 0.4u]
+      right_power_switch:
+        what: ceoloide/power_switch_smd_side
+        params:
+          side: B
+          from: RBAT
+          to: RRAW
+        where: 
+          ref: right_function_f5_r
+          shift: [-1.85u, 0.4u]
+          rotate: 180
+
+      left_bat:
+        what: ceoloide/battery_connector_jst_ph_2
+        params:
+          side: B
+          BAT_P: LBAT
+          BAT_N: LGND
+        where: 
+          ref: left_function_f5
+          shift: [1.45u, 0.5u]
+          rotate: -90
+      right_bat:
+        what: ceoloide/battery_connector_jst_ph_2
+        params:
+          side: B
+          BAT_P: RBAT
+          BAT_N: RGND
+        where: 
+          ref: right_function_f5_r
+          shift: [-1.45u, 0.5u]
+          rotate: 90
+
+      left_promicro:
+        what: promicro
+        params:
+          orientation: "down"
+          RAW: LRAW
+          GND: LGND
+          RST: LRST
+          VCC: LVCC
+          P21: LP21 # no use
+          P20: LP20 # no use
+          P19: LR6
+          P18: LR5
+          P15: LR4
+          P14: LR3
+          P16: LR2
+          P10: LR1
+          P1: LP0 # no use
+          P0: LP0 # no use
+          P2: LP2 # no use 
+          P3: LC7
+          P4: LC6
+          P5: LC5
+          P6: LC4
+          P7: LC3
+          P8: LC2 
+          P9: LC1
+        where:
+          ref: left_function_f5
+          shift: [1.25u,-0.6u]
+          rotate: -90
+      right_promicro:
+        what: promicro
+        params:
+          orientation: "down"
+          RAW: RRAW
+          GND: RGND
+          RST: RRST
+          VCC: RVCC
+          P21: RC1
+          P20: RC2
+          P19: RC3
+          P18: RC4
+          P15: RC5
+          P14: RC6
+          P16: RC7
+          P10: RC8
+          P1: RP0 # no use
+          P0: RP0 # no use
+          P2: RP2 # no use
+          P3: RP3 # no use
+          P4: RR6
+          P5: RR5
+          P6: RR4
+          P7: RR3
+          P8: RR2
+          P9: RR1
+        where:
+          ref: right_function_f5_r
+          shift: [-1.25u,-0.6u]
+          rotate: -90
+      
+      left_text:
+        what: ceoloide/utility_text
+        params:
+          text: "Jiyong Park"
+        where:
+          ref: left_function_f5
+          shift: [1.3u, -2u]
+      right_text:
+        what: ceoloide/utility_text
+        params:
+          text: "Jiyong Park"
+        where:
+          ref: right_function_f5_r
+          shift: [-1.3u, -2u]
+
+      hole_left_1:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [left_function_esc]
+          shift: [0.5u, -0.3u]
+      hole_left_2:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [left_function_f4]
+          shift: [0.5u, -0.3u]
+      hole_left_3:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [left_meta_ctrl]
+          shift: [0.5u, -0.3u]
+      hole_left_4:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [left_meta_space]
+          shift: [0.5u, -0.3u]
+      hole_left_5:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [left_mid_s]
+          shift: [0.5u, -0.3u]
+
+      hole_right_1:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [right_function_f5_r]
+          shift: [0.5u, -0.3u]
+      hole_right_2:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [right_function_f12]
+          shift: [-0.5u, -0.3u]
+      hole_right_3:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [right_meta_space_r]
+          shift: [-0.5u, -0.3u]
+      hole_right_4:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [right_meta_ctrl_r]
+          shift: [-0.5u, -0.3u]
+      hole_right_5:
+        what: ceoloide/mounting_hole_npth
+        where:
+          ref: [right_mid_l]
+          shift: [-0.5u, -0.3u]
+cases:
