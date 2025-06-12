@@ -1,0 +1,11 @@
+file_format: "1"
+id: jjongpark
+name: jjongpark
+type: shield
+url: https://github.com/jjongpark/jjo
+requires: [pro_micro]
+features:
+  - keys
+siblings:
+  - jjongpark_left
+  - jjongpark_right
